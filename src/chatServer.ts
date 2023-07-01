@@ -7,7 +7,7 @@ import { MAX_ROOM_CAPACITY, Rooms } from './room';
 import { WORDS } from './wordslist';
 
 export class ChatServer {
-    public static readonly PORT: number = 8081;
+    public static readonly PORT: number = 8080;
     private _app: express.Application;
     private server: Server;
     private io: socketIo.Server;
@@ -28,7 +28,7 @@ export class ChatServer {
     private initSocket(): void {
         this.io = new socketIo.Server(this.server, {
             cors: {
-                origin: process.env.NODE_ENV === 'prod' ? '' : "http://localhost:5173"
+                origin: process.env.NODE_ENV === 'prod' ? 'https://wordle-front-one.vercel.app/' : "http://localhost:5173"
             }
         });
     }
