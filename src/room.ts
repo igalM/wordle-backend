@@ -38,22 +38,18 @@ export class Rooms {
         });
     }
 
-    leaveRoom(id: string): void {
-        for (const roomId in this.state) {
-            const room = this.state[roomId];
-            if (room.findIndex(user => user.id === id) !== -1) {
-                const updatedRoom = room.filter(user => user.id !== id);
-                if (!updatedRoom.length) {
+    leaveRoom(id: string): Promise<string | null> {
+        return new Promise((resolve) => {
+            for (const roomId in this.state) {
+                const room = this.state[roomId];
+                if (room.findIndex(user => user.id === id) !== -1) {
                     delete this.state[roomId];
-                } else {
-                    const updatedRooms = {
-                        ...this.state,
-                        [roomId]: updatedRoom
-                    }
-                    this.state = updatedRooms;
+                    return resolve(roomId);
                 }
             }
-        }
+
+            resolve(null);
+        });
     }
 
     getRoom(roomId: string): Promise<User[]> {
