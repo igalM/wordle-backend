@@ -28,7 +28,7 @@ export class ChatServer {
     private initSocket(): void {
         this.io = new socketIo.Server(this.server, {
             cors: {
-                origin: process.env.NODE_ENV === 'prod' ? 'https://wordle-front-one.vercel.app/' : "http://localhost:5173"
+                origin: process.env.NODE_ENV === 'prod' ? 'https://wordle-front-one.vercel.app' : "http://localhost:5173"
             }
         });
     }
